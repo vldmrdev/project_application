@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>get_tracks</title>
+</head>
+<body>
+    <form method="post" action="/get_tracks">
+        <input type="text" name="text">
+        <button type="submit">Get artist's tracks</button>
+    </form>
+
+{% for track in tracks %}
+<p>{{ track.artistName }} - {{ track.trackName }} ({{track.collectionName}})</p>
+{% endfor %}
+</body>
+</html>
