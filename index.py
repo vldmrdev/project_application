@@ -6,10 +6,12 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///itunes2.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
+
 # global temp var to show tracks list
 Tracks = []
 
 
+# DB table
 class ItunesArtist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     artistName = db.Column(db.String(50), nullable=False)
@@ -20,6 +22,7 @@ class ItunesArtist(db.Model):
 
 
 @app.route('/')
+@app.route('/index')
 def index():
     return render_template('index.html')
 
@@ -54,7 +57,47 @@ def show_tracks():
     # return render_template('index.html', tracks=tracks)
 
 
-#print(Tracks)
+# #db connection status
+# @app.route('/')
+# def testdb():
+#     try:
+#         db.session.query("1").from_statement("SELECT 1").all()
+#         return '<h1>It works.</h1>'
+#     except:
+#         return '<h1>Something is broken.</h1>'
+
+
+@app.route('/add_tracks', methods=['POST'])
+def add_tracks():
+    id = '136975'
+    url = f'https://itunes.apple.com/lookup?id={id}&entity=song&limit=200'  # max limit is 200 >:-(
+
+    response = urllib.request.urlopen(url)
+    artists = response.read()
+    data = json.loads(artists)
+    #print(data)
+
+    tracks = []
+
+    for track in data["results"]:
+        if track['wrapperType'] == 'track':
+            tracks.append(track)
+
+    # tracks_objects = []
+    print(tracks)
+    tracks_object = []
+
+    for track in tracks:
+        tracks_object.appent(artistName=track['artistName'], trackName=track['trackName'])
+    try:
+        db.session.add_all(tracks_object)
+        db.session.commit()
+        return redirect('/')
+    except:
+        return "ERROR"
+
+
+# print(Tracks)
 
 # @app.route('/add_tracks', methods=['POST', 'GET'])
 # def add_tracks():

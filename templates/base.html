@@ -2,24 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-
-    <title>{% block title %}{% endblock %}</title>
+    <title>TRACKS</title>
 </head>
+<h2><a href="{{ url_for('index') }}">TRACKS</a></h2>
+<form method="post" action="/show_tracks">
+    Input Artist's ID(itunes) <input type="number" name="id" value="136975">
+    <p>Show tracks from iTunes API <button type="submit">Show</button>
+</form>
+<p>
+<form method="post" action="/add_tracks">
+    Add tracks to DB <button type="submit">Add</button>
+</form>
+<p>
+<form method="post" action="/read_tracks">
+    Read tracks from DB <button type="submit">Read</button>
+</form>
+<p>
+<form method="post" action="/del_tracks">
+    Delete all from DB  <button type="submit">Delete</button>
+</form>
+<hr>
 <body>
-    <div class="container d-flex flex-wrap">
-      <ul class="nav me-auto">
-        <li class="nav-item"><a href="/" class="nav-link link-dark px-2 active" aria-current="page">Home</a></li>
-        <li class="nav-item"><a href="/about" class="nav-link link-dark px-2">About</a></li>
-      </ul>
-    </div>
-    {% block body %}{% endblock %}
 
-    <footer class="container footer mt-auto py-3 bg-light">
-      <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
-      </div>
-    </footer>
+{% block body %} {% endblock %}
+
 </body>
 </html>

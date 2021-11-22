@@ -1,28 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>TRACKS</title>
-</head>
-<h2>TRACKS</h2>
-<form method="post" action="/show_tracks">
-    Input Artist's ID(itunes) <input type="number" name="id" value="136975">
-    <p>Show tracks from API <button type="submit">Show</button>
-</form>
-<p>
-<form method="post" action="/add_tracks">
-    Add tracks to DB <button type="submit">Add</button>
-</form>
-<p>
-<form method="post" action="/read_tracks">
-    Read tracks from DB <button type="submit">Read</button>
-</form>
-<p>
-<form method="post" action="/del_tracks">
-    Delete all from DB  <button type="submit">Delete</button>
-</form>
-<hr>
-<body>
+{% extends 'base.html' %}
+
+{% block body %}
 
 <h3>Tracks({{ tracks | length }}):</h3>
 {% for track in tracks %}
@@ -31,5 +9,5 @@
     {% endif %}
 {% endfor %}
 
-</body>
-</html>
+{% endblock %}
+
