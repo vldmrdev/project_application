@@ -79,9 +79,11 @@ def add_tracks():
     return redirect('/')
 
 
-# @app.route('/read_tracks')
-# def read_tracks():
-#
+@app.route('/read_tracks', methods=['POST','GET'])
+def read_tracks():
+    tracks = ItunesArtist.query.all()
+    return render_template("read_tracks.html", tracks=tracks)
+
 #
 # # delete all tracks
 # @app.route('/del_tracks')
