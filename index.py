@@ -71,17 +71,22 @@ def add_tracks():
         if track['wrapperType'] == 'track':
             tracks.append(track)
 
-    for track in tracks:
-        artistName=track['artistName']
-        trackName=track['trackName']
-        track_object = ItunesArtist(artistName=artistName, trackName=trackName)
-        db.session.add(track_object)
-        db.session.commit()
+    # write from tracks(json) list to DB
+    track_object_list = [ItunesArtist(artistName=track['artistName'], trackName=track['trackName']) for track in tracks]
+    db.session.add_all(track_object_list)
+    db.session.commit()
 
     return redirect('/')
 
 
-@app.route()
+# @app.route('/read_tracks')
+# def read_tracks():
+#
+#
+# # delete all tracks
+# @app.route('/del_tracks')
+# def del_tracks():
+
 
 # print(Tracks)
 
