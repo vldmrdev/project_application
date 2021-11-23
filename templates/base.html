@@ -7,10 +7,11 @@
 <h2><a href="{{ url_for('index') }}">TRACKS</a></h2>
 <form method="post" action="/show_tracks">
     Input Artist's ID(itunes) <input type="number" name="id" value="136975">
-    <p>Show tracks from iTunes API <button type="submit">Show</button>
+    Show tracks from iTunes API <button type="submit">Show</button>
 </form>
 <p>
 <form method="post" action="/add_tracks">
+    Input Artist's ID(itunes) <input type="number" name="id" value="136975">
     Add tracks to DB <button type="submit">Add</button>
 </form>
 <p>
