@@ -76,18 +76,29 @@ def add_tracks():
     db.session.add_all(track_object_list)
     db.session.commit()
 
-    return redirect('/')
+    return redirect('/read_tracks')
 
-
+# read tracks list from DB
 @app.route('/read_tracks', methods=['POST','GET'])
 def read_tracks():
     tracks = ItunesArtist.query.all()
     return render_template("read_tracks.html", tracks=tracks)
 
-#
-# # delete all tracks
-# @app.route('/del_tracks')
-# def del_tracks():
+
+# delete all tracks
+@app.route('/del_tracks', methods=['POST','GET'])
+def del_tracks():
+
+    # try:
+    db.session.query(ItunesArtist).delete()
+    db.session.commit()
+    return redirect("/read_tracks")
+    # except:
+    #     db.session.rollback()
+    #     return redirect("read_tracks.html")
+
+
+
 
 
 # print(Tracks)

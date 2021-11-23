@@ -2,13 +2,13 @@
 
 {% block body %}
 
-{% for track in tracks %}
-    {% if track %}
-        {{ track.id }}. {{ track.artistName }} - {{ track.trackName }} <p>
-    {% else %}
-        <h3>DB is empty </h3>
-    {% endif %}
-{% endfor %}
-
+<h3>Rows in DB: {{ tracks | length }}</h3>
+{% if tracks[0] %}
+    {% for track in tracks %}
+            {{ track.id }}. {{ track.artistName }} - {{ track.trackName }} <p>
+    {% endfor %}
+{% else %}
+    <h3>DB is empty </h3>
+{% endif %}
 
 {% endblock %}
